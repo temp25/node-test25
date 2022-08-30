@@ -36,6 +36,11 @@ if [ -z "$ARIA2C_RPC_SERVER_PID" ]; then
     #converting static binaries to executables
     chmod +x aria2c
 
+    rm -rf "${PWD}/public/aria2c.log"
+    rm -rf "${PWD}/aria_session.txt"
+    rm -rf "${PWD}/downloads"
+    rm -rf "${PWD}/public/downloads"
+
     mkdir "${PWD}/downloads"
     touch "${PWD}/aria_session.txt"
 
@@ -43,7 +48,8 @@ if [ -z "$ARIA2C_RPC_SERVER_PID" ]; then
 
     # nohup ./aria2c --conf-path=aria2c.config > /dev/null 2>&1 < /dev/null &
     # nohup ./aria2c --enable-rpc --rpc-listen-all --log=/app/public/aria2c.log --ca-certificate=/app/ca-certificates.crt --dir=/app/public/downloads --input-file=aria_session.txt --save-session=aria_session.txt --save-session-interval=3 --max-connection-per-server=16 > /dev/null 2>&1 < /dev/null &
-    nohup ${PWD}/aria2c --enable-rpc --rpc-listen-all --log=${PWD}/public/aria2c.log --check-certificate=false --dir=${PWD}/public/downloads --input-file=aria_session.txt --save-session=aria_session.txt --save-session-interval=3 --max-connection-per-server=16 > /dev/null 2>&1 &
+    # nohup ${PWD}/aria2c --enable-rpc --rpc-listen-all --log=${PWD}/public/aria2c.log --check-certificate=false --dir=${PWD}/public/downloads --input-file=aria_session.txt --save-session=aria_session.txt --save-session-interval=3 --max-connection-per-server=16 > /dev/null 2>&1 &
+    nohup ${PWD}/aria2c --enable-rpc --rpc-listen-all --check-certificate=false --dir=${PWD}/public/downloads --input-file=aria_session.txt --save-session=aria_session.txt --save-session-interval=3 --max-connection-per-server=16 > /dev/null 2>&1 &
     
     ARIA2C_RPC_SERVER_PID=$!
     echo "Aria2c RPC server started with pid, $ARIA2C_RPC_SERVER_PID"
