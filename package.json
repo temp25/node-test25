@@ -1,0 +1,28 @@
+{
+  "name": "aria2c-backend",
+  "version": "1.0.0",
+  "description": "Backend for Aria2c Web UI",
+  "main": "server.js",
+  "scripts": {
+    "prestart": "chmod +x scripts/startAria2RPC.sh && ./scripts/startAria2RPC.sh",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "node",
+    "ariac",
+    "expressjs",
+    "sse"
+  ],
+  "author": "Gowtham Alaguraj",
+  "license": "ISC",
+  "dependencies": {
+    "basic-auth": "^2.0.1",
+    "express": "^4.17.1",
+    "express-sslify": "^1.2.0",
+    "jayson": "^3.3.4",
+    "kill-port": "^1.6.1",
+    "minimist": "^1.2.5",
+    "ps-list": "^7.2.0",
+    "socket.io": "^2.3.0"
+  }
+}
