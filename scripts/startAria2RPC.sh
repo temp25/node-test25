@@ -9,7 +9,10 @@ if [ -z "$ARIA2C_RPC_SERVER_PID" ]; then
     echo ""
     ps -ef
     echo ""
-    netstat -anp | grep 6800
+    #netstat -anp | grep 6800
+    lsof -i:6800
+    echo ""
+    fuser 6800/tcp
     echo ""
 
     echo "Downloading Aria2c static build latest release from q3aql/aria2-static-builds"
@@ -51,6 +54,7 @@ if [ -z "$ARIA2C_RPC_SERVER_PID" ]; then
     
     ARIA2C_RPC_SERVER_PID=$!
     echo "Aria2c RPC server started with pid, $ARIA2C_RPC_SERVER_PID"
+    echo "$ARIA2C_RPC_SERVER_PID" > aria2.pid
 else
     echo "Aria2c RPC server already started with pid, $ARIA2C_RPC_SERVER_PID"
 fi
