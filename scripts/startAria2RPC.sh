@@ -2,18 +2,12 @@
 
 ARIA2C_RPC_SERVER_PID=$(ps -ef | grep aria2c | grep -v grep | awk '{print $2}')
 
+if [ -f "aria2.pid" ] && [ -z "$ARIA2C_RPC_SERVER_PID" ]; then
+  ARIA2C_RPC_SERVER_PID=$(cat aria2.pid);
+fi
+
 if [ -z "$ARIA2C_RPC_SERVER_PID" ]; then
     ARIA2C_BUILD_NAME=aria2c.tar.bz2
-
-    #For testing
-    echo ""
-    ps -ef
-    echo ""
-    #netstat -anp | grep 6800
-    lsof -i:6800
-    echo ""
-    fuser 6800/tcp
-    echo ""
 
     echo "Downloading Aria2c static build latest release from q3aql/aria2-static-builds"
     curl -s https://api.github.com/repos/q3aql/aria2-static-builds/releases/latest | grep "download_url" | grep "32bit-build1" | grep "tar" | cut -d : -f 2,3 | tr -d \" | wget -O $ARIA2C_BUILD_NAME -qi- - 
