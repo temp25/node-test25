@@ -16,10 +16,9 @@ if [ -z "$ARIA2C_RPC_SERVER_PID" ]; then
     tar xjf $ARIA2C_BUILD_NAME --strip-components=1 --wildcards **/aria2c **/ca-certificates.crt
 
     PWD="$(pwd)"
+    echo "Current working directory, ${PWD}"
 
-    echo -e "\nCurrent working directory, ${PWD}\n"
-
-    echo -e "\nListing directory contents\n"
+    echo "Listing directory contents,"
     ls -lah "${PWD}"
 
     RESULT=$?
